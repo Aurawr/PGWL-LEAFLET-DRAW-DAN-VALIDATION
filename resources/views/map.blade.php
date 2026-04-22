@@ -206,5 +206,93 @@
 	    drawnItems.addLayer(layer);
     });
 
+    //Point Layer
+    var points = L.geoJSON(null, {
+	// Style
+
+	// onEachFeature
+     onEachFeature: function (feature, layer) {
+	// variable popup content
+	    var popup_content = "Nama: " + feature.properties.name + "<br>" +
+		"Deskripsi: " + feature.properties.description + "<br>" +
+        "Dibuat: " + feature.properties.created_at;
+
+	    layer.on({
+		    click: function (e) {
+			    points.bindPopup(popup_content);
+		    },
+	    });
+    }
+
+    });
+
+    $.getJSON("{{ route('points.geojson') }}", function (data) {
+	points.addData(data); // Menambahkan data ke dalam GeoJSON Point Sarana Prasarana
+	map.addLayer(points); // Menambahkan GeoJSON Point Sarana Prasarana ke dalam peta
+    });
+
+    //Polylines Layer
+    var polylines = L.geoJSON(null, {
+	// Style
+
+	// onEachFeature
+     onEachFeature: function (feature, layer) {
+	// variable popup content
+	    var popup_content = "Nama: " + feature.properties.name + "<br>" +
+		"Deskripsi: " + feature.properties.description + "<br>" +
+        "Dibuat: " + feature.properties.created_at;
+
+	    layer.on({
+		    click: function (e) {
+			    polylines.bindPopup(popup_content);
+		    },
+	    });
+    }
+
+    });
+
+    $.getJSON("{{ route('polylines.geojson') }}", function (data) {
+	polylines.addData(data); // Menambahkan data ke dalam GeoJSON Polyline
+	map.addLayer(polylines); // Menambahkan GeoJSON Polyline ke dalam peta
+    });
+
+    //Polygons Layer
+    var polygons = L.geoJSON(null, {
+	// Style
+
+	// onEachFeature
+     onEachFeature: function (feature, layer) {
+	// variable popup content
+	    var popup_content = "Nama: " + feature.properties.name + "<br>" +
+		"Deskripsi: " + feature.properties.description + "<br>" +
+        "Dibuat: " + feature.properties.created_at;
+
+	    layer.on({
+		    click: function (e) {
+			    polygons.bindPopup(popup_content);
+		    },
+	    });
+    }
+
+    });
+
+    $.getJSON("{{ route('polygons.geojson') }}", function (data) {
+	polygons.addData(data); // Menambahkan data ke dalam GeoJSON Polygon
+	map.addLayer(polygons); // Menambahkan GeoJSON Polygon ke dalam peta
+    });
+
+    // Layer Control
+    var baseMaps = {
+
+    };
+
+    var overlayMaps = {
+	    "Marker": points,
+	    "Polyline": polylines,
+	    "Polygon": polygons,
+    };
+
+    var controllayer = L.control.layers(baseMaps, overlayMaps);
+    controllayer.addTo(map);
     </script>
 @endsection
