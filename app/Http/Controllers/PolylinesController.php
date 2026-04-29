@@ -35,17 +35,35 @@ class PolylinesController extends Controller
             'geometry_polyline' => 'required',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ],
         [
             'geometry_polyline.required' => 'Geometry polyline is required.',
             'name.required' => 'Name is required.',
             'description.required' => 'Description is required.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg.',
+            'image.max' => 'The image may not be greater than 2048 kilobytes.',
         ]);
-        
-       $data = [
+
+        // Create directory for storing images if it doesn't exist
+        if (!is_dir('storage/images')) {
+            mkdir('./storage/images', 0777);
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name_image = time() . "_polyline." . strtolower($image->getClientOriginalExtension());
+            $image->move('storage/images', $name_image);
+        } else {
+            $name_image = null;
+        }
+
+        $data = [
             'geom' => $request->geometry_polyline,
             'name' => $request->name,
             'description' => $request->description,
+            'image' => $name_image,
         ];
 
         // Simpan data ke database

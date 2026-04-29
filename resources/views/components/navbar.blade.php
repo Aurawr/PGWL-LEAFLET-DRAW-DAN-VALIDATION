@@ -12,7 +12,7 @@
           href="{{ route('home') }}">Beranda</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('map') }}">Peta</a>
+          <a class="nav-link" href="{{ route('map') }}"><i class="fa-solid fa-map-location-dot"></i> Peta Interaktif</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('table') }}">Tabel</a>

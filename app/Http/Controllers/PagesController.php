@@ -9,7 +9,7 @@ class PagesController extends Controller
     public function map()
     {
         $data = [
-           'title' => 'Peta',
+           'title' => 'Peta Interaktif',
         ];
         return view('map',$data);
     }
