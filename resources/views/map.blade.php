@@ -240,6 +240,10 @@
     var routedelete = "{{ route('points.delete', ':id') }}";
     routedelete = routedelete.replace(':id', feature.properties.id);
 
+    // Route edit point
+    var routeedit = "{{ route('point.edit', ':id') }}";
+    routeedit = routeedit.replace(':id', feature.properties.id);
+
 	// variable popup content
 	    var popup_content = "Nama: " + feature.properties.name + "<br>" +
 		"Deskripsi: " + feature.properties.description + "<br>" +
@@ -247,12 +251,17 @@
         "<img src='{{ asset('storage/images/') }}/" +
         feature.properties.image + "' alt='' class='img-thumbnail' width='400'>" +
         "<br><br>" +
-        "<form action='"+ routedelete + "' method='post'>" +
+        "<div class='d-flex gap-2'>" +
+        "<form action='"+ routedelete + "' method='post' class='m-0'>" +
         '@csrf' +
         '@method('delete')' +
          "<button type='submit' class='btn btn-sm btn-danger' " +
         "onclick=\"return confirm('Are you sure you want to delete this feature?')\">" +
-        "Delete</button></form>";
+        "<i class='fas fa-trash me-2'></i> Delete</button>" +
+        "</form>" +
+        "<a href= '" + routeedit + "' class='btn btn-sm btn-warning'>" +
+        "<i class='fas fa-edit me-2'></i> Edit</a>" +
+        "</div>";
 
 	    layer.on({
 		    click: function (e) {
@@ -276,7 +285,10 @@
 	// onEachFeature
     onEachFeature: function (feature, layer) {
 
-        // Route delete point
+        // Route delete polyline
+        var routeedit = "{{ route('polyline.edit', ':id') }}";
+        routeedit = routeedit.replace(':id', feature.properties.id);
+
         var routedelete = "{{ route('polylines.delete', ':id') }}";
         routedelete = routedelete.replace(':id', feature.properties.id);
 
@@ -287,12 +299,17 @@
         "<img src='{{ asset('storage/images/') }}/" +
         feature.properties.image + "' alt='' class='img-thumbnail' width='400'>" +
         "<br><br>" +
-        "<form action='"+ routedelete + "' method='post'>" +
+        "<div class='d-flex gap-2'>" +
+        "<form action='"+ routedelete + "' method='post' class='m-0'>" +
         '@csrf' +
         '@method('delete')' +
          "<button type='submit' class='btn btn-sm btn-danger' " +
         "onclick=\"return confirm('Are you sure you want to delete this feature?')\">" +
-        "Delete</button></form>";
+        "<i class='fas fa-trash me-2'></i> Delete</button>" +
+        "</form>" +
+        "<a href= '" + routeedit + "' class='btn btn-sm btn-warning'>" +
+        "<i class='fas fa-edit me-2'></i> Edit</a>" +
+        "</div>";
 
 
 	    layer.on({
@@ -320,6 +337,10 @@
         var routedelete = "{{ route('polygons.delete', ':id') }}";
         routedelete = routedelete.replace(':id', feature.properties.id);
 
+        // Route edit polygon
+        var routeedit = "{{ route('polygon.edit', ':id') }}";
+        routeedit = routeedit.replace(':id', feature.properties.id);
+
 	// variable popup content
 	    var popup_content = "Nama: " + feature.properties.name + "<br>" +
 		"Deskripsi: " + feature.properties.description + "<br>" +
@@ -327,12 +348,17 @@
         "<img src='{{ asset('storage/images/') }}/" +
         feature.properties.image + "' alt='' class='img-thumbnail' width='400'>" +
         "<br><br>" +
-        "<form action='"+ routedelete + "' method='post'>" +
+         "<div class='d-flex gap-2'>" +
+        "<form action='"+ routedelete + "' method='post' class='m-0'>" +
         '@csrf' +
         '@method('delete')' +
          "<button type='submit' class='btn btn-sm btn-danger' " +
         "onclick=\"return confirm('Are you sure you want to delete this feature?')\">" +
-        "Delete</button></form>";
+        "<i class='fas fa-trash me-2'></i> Delete</button>" +
+        "</form>" +
+        "<a href= '" + routeedit + "' class='btn btn-sm btn-warning'>" +
+        "<i class='fas fa-edit me-2'></i> Edit</a>" +
+        "</div>";
 
 
 	    layer.on({
